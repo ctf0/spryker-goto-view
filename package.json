@@ -1,0 +1,130 @@
+{
+    "name": "spryker-goto-view",
+    "displayName": "Spryker Goto View",
+    "description": "Quick jump to view",
+    "version": "0.0.1",
+    "publisher": "ctf0",
+    "engines": {
+        "vscode": "^1.90.0"
+    },
+    "icon": "images/logo.png",
+    "repository": "https://github.com/ctf0/spryker-goto-view",
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "PHP",
+        "Spryker",
+        "goto",
+        "file navigation"
+    ],
+    "activationEvents": [
+        "onLanguage:php",
+        "onLanguage:twig",
+        "onStartupFinished"
+    ],
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Spryker Goto View",
+            "properties": {
+                "sprykerGotoView.watchFilesForChanges": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "watch twig files for changes so code lens list is always fresh (debounced to 1/min to minimize load)"
+                },
+                "sprykerGotoView.showCodeLens": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "show/hide code lenses"
+                },
+                "sprykerGotoView.codeLensText": {
+                    "type": "string",
+                    "default": "$(loading~spin) show files with similar call (#)",
+                    "markdownDescription": "codelens command text\n\nrequire `#sprykerGotoView.showCodeLens#`\n\n[$(icon-name)](https://microsoft.github.io/vscode-codicons/dist/codicon.html)\n\n\\# == placeholder for files length (remove it to disable this feature)"
+                },
+                "sprykerGotoView.similarIncludeDirectives": {
+                    "type": "array",
+                    "default": [
+                        "template",
+                        "molecule",
+                        "atom",
+                        "organism",
+                        "model"
+                    ],
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "markdownDescription": "directives to add similar view includes code lens for\n\nrequire `#sprykerGotoView.showCodeLens#`"
+                },
+                "sprykerGotoView.widgetCall": {
+                    "type": "array",
+                    "default": [
+                        "findWidget(",
+                        "widget "
+                    ],
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "markdownDescription": "widget php files call"
+                },
+                "sprykerGotoView.similarIncludeFilesRegex": {
+                    "type": "array",
+                    "default": [
+                        "src/Pyz/Yves/**/*.twig",
+                        "src/Pyz/Zed/**/*.twig"
+                    ],
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "description": "which files to look for similar includes (path begin from root)"
+                },
+                "sprykerGotoView.copiedPathSurround": {
+                    "type": "string",
+                    "default": "@$ph",
+                    "description": "auto surround copied file path ($ph will be replaced with the actual file path)"
+                },
+                "sprykerGotoView.showSimilarIncludeLinks": {
+                    "type": "boolean",
+                    "default": true,
+                    "markdownDescription": "show/hide links for similar includes paths ex.`molecule('custom-select')`"
+                },
+                "sprykerGotoView.twigFileWatcherRegex": {
+                    "type": "string",
+                    "default": "src/Pyz/**/*.twig",
+                    "markdownDescription": "twig file watcher glob pattern"
+                }
+            }
+        }
+    },
+    "main": "./out/main",
+    "scripts": {
+        "vscode:prepublish": "npm run esbuild-base -- --pure:console.log --minify",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+        "watch": "npm run esbuild",
+        "lint": "eslint --fix src --config=eslint.config.cjs"
+    },
+    "devDependencies": {
+        "@stylistic/eslint-plugin": "^2.12.1",
+        "@types/glob": "^8.1.0",
+        "@types/node": "^22.10.2",
+        "@types/vscode": "^1.90.0",
+        "@typescript-eslint/eslint-plugin": "^8.18.0",
+        "esbuild": "^0.24.0",
+        "eslint": "^9.16.0",
+        "typescript": "^5.7.2"
+    },
+    "dependencies": {
+        "escape-string-regexp": "^5.0.0",
+        "find-in": "^0.2.0",
+        "lodash.debounce": "^4.0.8"
+    }
+}
