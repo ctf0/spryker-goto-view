@@ -1,7 +1,5 @@
 # Spryker goto view
 
-# Features
-
 <img width="707" alt="Image" src="https://github.com/user-attachments/assets/0c36f7a3-e24c-42e4-99cf-74a2230d3ed9" />
 
 - copy file path ex.`/src/Pyz/Yves/CheckoutPage/Theme/default/views/summary/summary.twig` > `@CheckoutPage/views/summary/summary.twig`

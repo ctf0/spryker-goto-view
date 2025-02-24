@@ -2,7 +2,7 @@
     "name": "spryker-goto-view",
     "displayName": "Spryker Goto View",
     "description": "Quick jump to view",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "publisher": "ctf0",
     "engines": {
         "vscode": "^1.90.0"
